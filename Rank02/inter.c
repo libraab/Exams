@@ -6,41 +6,41 @@
 /*   By: abouhlel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 11:21:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/08/03 11:21:52 by abouhlel         ###   ########.fr       */
+/*   Updated: 2021/10/06 08:34:40 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void ft_putstr(char *s)
+void ft_putstr(char *str)
 {
-	for(int i = 0; s[i] != 0; i++)
-		write(1, &s[i], 1);
+	for(int i = 0; str[i] != 0; i++)
+		write(1, &str[i], 1);
 }
 
-int ft_isset(char c, char *s)
+int ft_search_c_in_str(char c, char *str)
 {
-	for (int i = 0; s[i] != 0; i++)
+	for (int i = 0; str[i] != 0; i++)
 	{
-		if (s[i] == c)
+		if (str[i] == c)
 			return (1);
 	}
 	return (0);
 }
 
-void	ft_inter(char *s1, char *s2)
+void	ft_inter(char *str1, char *str2)
 {
 	int j = 0;
 	char f[1000];
 	
 	f[j] = 0;
-	for (int i = 0; s1[i] != 0; i++)
+	for (int i = 0; str1[i] != 0; i++)
 	{
-		if (ft_isset(s1[i], s2) == 1)
+		if (ft_search_c_in_str(str1[i], str2) == 1)
 		{
-			if (ft_isset(s1[i], f) == 0)
+			if (ft_search_c_in_str(str1[i], f) == 0)
 			{
-				f[j++] = s1[i];
+				f[j++] = str1[i];
 				f[j] = 0;
 			}
 		}

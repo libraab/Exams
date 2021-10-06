@@ -6,45 +6,45 @@
 /*   By: abouhlel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 11:21:56 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/08/03 11:22:11 by abouhlel         ###   ########.fr       */
+/*   Updated: 2021/10/06 08:36:30 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void ft_putstr(char *s)
+void ft_putstr(char *str)
 {
-	for(int i = 0; s[i] != 0; i++)
-		write(1, &s[i], 1);
+	for(int i = 0; str[i] != 0; i++)
+		write(1, &str[i], 1);
 }
 
-int ft_isset(char c, char *s)
+int ft_search_c_in_str(char c, char *str)
 {
-	for (int i = 0; s[i] != 0; i++)
+	for (int i = 0; str[i] != 0; i++)
 	{
-		if (s[i] == c)
+		if (str[i] == c)
 			return (1);
 	}
 	return (0);
 }
 
-void	ft_union(char *s1, char *s2)
+void	ft_union(char *str1, char *str2)
 {
 	char f[1000];
 	int j = 0;
 	
 	f[j] = 0;
-	for (int i = 0; s1[i] != 0; i++)
+	for (int i = 0; str1[i] != 0; i++)
 	{
-		if (ft_isset(s1[i], f) == 0)
+		if (ft_search_c_in_str(s1[i], f) == 0)
 		{
 			f[j++] = s1[i];
 			f[j] = 0;
 		}
 	}
-	for (int i = 0; s2[i] != 0; i++)
+	for (int i = 0; str2[i] != 0; i++)
 	{
-		if (ft_search(s2[i], f) == 0)
+		if (ft_search_c_in_str(str2[i], f) == 0)
 		{
 			f[j++] = s2[i];
 			f[j] = 0;
