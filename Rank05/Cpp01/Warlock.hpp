@@ -1,33 +1,30 @@
-#pragma once
-#include "ATarget.hpp"
-#include "ASpell.hpp"
+#pragma once 
 #include <iostream>
 #include <string>
+#include "ASpell.hpp"
+#include "ATarget.hpp"
 #include <vector>
 
 class Warlock
 {
-    public:
-        Warlock(std::string const & name, std::string const & title);
-        ~Warlock();
+	public:
+		Warlock(const std::string &name, const std::string &title);
+		~Warlock();
+		
+		const std::string &getName() const;
+		const std::string &getTitle() const;
 
-        const std::string &getName() const;
-        const std::string &getTitle() const;
+		void setTitle(const std::string &title);
+		void introduce() const;
 
-        void setTitle(const std::string &title);
-        void introduce() const;
+		void learnSpell(ASpell *as) ;
+		void forgetSpell(const std::string &name) ;
+		void launchSpell(const std::string &name, const ATarget &at) ;
 
-        void learnSpell(ASpell *as);
-        void forgetSpell(const std::string &name);
-        void launchSpell(const std::string &name, const ATarget &at);
-
-    private:
-        std::string name;
-        std::string title;
-
-        Warlock();
-        Warlock(const Warlock &other);
-        Warlock &operator = (const Warlock &other);
-        std::vector<ASpell *> arr;
-    
+	private:
+		Warlock(const Warlock &cpy);
+		std::string  name;
+		std::string  title;
+		Warlock &operator = (const Warlock &op);
+		std::vector <ASpell *> ar;
 };
