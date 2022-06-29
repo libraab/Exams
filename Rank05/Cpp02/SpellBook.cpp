@@ -3,21 +3,21 @@
 SpellBook::SpellBook() {}
 SpellBook::~SpellBook()
 {
-	std::vector<ASpell *>::iterator it_b = this->arr_s.begin();
-	std::vector< ASpell *>::iterator it_e = this->arr_s.end();
+	std::vector<ASpell *>::iterator it_b = this->ar.begin();
+	std::vector< ASpell *>::iterator it_e = this->ar.end();
 
 	while(it_b != it_e)
 	{
 		delete (*it_b);
 		it_b++;
 	}
-	this->arr_s.clear();
+	this->ar.clear();
 }
 
 void SpellBook::learnSpell(ASpell *as)
 {
-	std::vector<ASpell *>::iterator it_b = this->arr_s.begin();
-	std::vector< ASpell *>::iterator it_e = this->arr_s.end();
+	std::vector<ASpell *>::iterator it_b = this->ar.begin();
+	std::vector< ASpell *>::iterator it_e = this->ar.end();
 
 	while(it_b != it_e)
 	{
@@ -25,20 +25,19 @@ void SpellBook::learnSpell(ASpell *as)
 			return;
 		it_b++;
 	}
-	this->arr_s.push_back(as->clone());
-	}
+	this->ar.push_back(as->clone());
 }
 void SpellBook::forgetSpell(std::string const & name)
 {
-	std::vector<ASpell *>::iterator it_b = this->arr_s.begin();
-	std::vector< ASpell *>::iterator it_e = this->arr_s.end();
+	std::vector<ASpell *>::iterator it_b = this->ar.begin();
+	std::vector< ASpell *>::iterator it_e = this->ar.end();
 
 	while(it_b != it_e)
 	{
 		if((*it_b)->getName() == name)
 		{
 			delete (*it_b);
-			this->arr_s.erase(it_b);
+			this->ar.erase(it_b);
 			return;
 		}
 		it_b++;
@@ -47,8 +46,8 @@ void SpellBook::forgetSpell(std::string const & name)
 
 ASpell *SpellBook::createSpell(const std::string &name)
 {
-	std::vector<ASpell *>::iterator it_b = this->arr_s.begin();
-	std::vector< ASpell *>::iterator it_e = this->arr_s.end();
+	std::vector<ASpell *>::iterator it_b = this->ar.begin();
+	std::vector< ASpell *>::iterator it_e = this->ar.end();
 
 	while(it_b != it_e)
 	{
