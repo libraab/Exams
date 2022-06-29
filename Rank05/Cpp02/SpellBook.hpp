@@ -15,8 +15,8 @@ class SpellBook
         ASpell *createSpell(const std::string &name);
 
     private:
-        std::vector<ASpell *> arr_s;
+        std::vector<ASpell *> ar;
 
-        SpellBook(const SpellBook &other);
-        SpellBook &operator = (const SpellBook &other);
+        SpellBook(const SpellBook &cpy);
+        SpellBook &operator = (const SpellBook &op);
 };
