@@ -1,67 +1,72 @@
 #include "Warlock.hpp"
-
-Warlock::Warlock(std::string const & name, std::string const & title)
+Warlock::Warlock(const std::string &name, const std::string &title)
 {
-this->name = name;
-this->title = title;
-std::cout << this->name << ": This looks like another boring day." << std::endl;
+	this->name = name;
+	this->title = title;
+	std::cout << this->name << ": This looks like another boring day." << std::endl; 
 }
+
+const std::string &Warlock::getName() const { return (this->name) ;}
+const std::string &Warlock::getTitle() const { return (this->title) ;}
+void Warlock::setTitle(const std::string &title) { this->title = title;}
+void Warlock::introduce() const {std::cout << this->name << ": I am " << this->name << ", "  << this->title << "!" << std::endl;}
 Warlock::~Warlock()
 {
-std::cout << this->name << ": My job here is done!" << std::endl;
-}
+	std::vector <ASpell *>::iterator it_b = this->ar.begin();
+	std::vector <ASpell *>::iterator it_e = this->ar.end();
 
-std::string const & Warlock::getName() const{ return(this->name);}
-std::string const & Warlock::getTitle() const{return(this->title);}
-
-void Warlock::setTitle(std::string const & title) {this->title = title;}
-void Warlock::introduce() const
-{
-std::cout << this->name << ": I am " << this->name << ", " << this->title << "!" << std::endl;
+	std::cout << this->name << ": My job here is done!" << std::endl;
+	while(it_b != it_e)
+	{
+		delete(*it_b);
+		it_b++;
+	}
+	this->ar.clear();
 }
 
 void Warlock::learnSpell(ASpell *as)
 {
-b.learnSpell(as);
-}
-void Warlock::forgetSpell(std::string const & name)
-{
-b.forgetSpell(name);
-}
+	std::vector <ASpell *>::iterator it_b = this->ar.begin();
+	std::vector <ASpell *>::iterator it_e = this->ar.end();
 
-void Warlock::launchSpell(std::string const & name, ATarget const & at)
-{
-ASpell *t = b.createSpell(name);
-if(t)
-t->launch(at);
+	while(it_b != it_e)
+	{
+		if((*it_b)->getName() == as->getName())
+			return;
+		it_b++;
+	}
+	this->ar.push_back(as->clone());
 }
 
-
-#include "Dummy.hpp"
-#include "Fwoosh.hpp"
-#include "Polymorph.hpp"
-#include "Fireball.hpp"
-#include "BrickWall.hpp"
-#include "TargetGenerator.hpp"
-int main()
+void Warlock::forgetSpell(const std::string &name) 
 {
-  Warlock richard("Richard", "foo");
-  richard.setTitle("Hello, I'm Richard the Warlock!");
-  BrickWall model1;
+	std::vector <ASpell *>::iterator it_b = this->ar.begin();
+	std::vector <ASpell *>::iterator it_e = this->ar.end();
 
-  Polymorph* polymorph = new Polymorph();
-  TargetGenerator tarGen;
+	while(it_b != it_e)
+	{
+		if((*it_b)->getName() == name)
+		{
+			delete(*it_b);
+			this->ar.erase(it_b);
+			return;
+		}
+		it_b++;
+	}
+}
 
-  tarGen.learnTargetType(&model1);
-  richard.learnSpell(polymorph);
-
-  Fireball* fireball = new Fireball();
-
-  richard.learnSpell(fireball);
-
-  ATarget* wall = tarGen.createTarget("Inconspicuous Red-brick Wall");
-
-  richard.introduce();
-  richard.launchSpell("Polymorph", *wall);
-  richard.launchSpell("Fireball", *wall);
+void Warlock::launchSpell(const std::string &name, const ATarget &at)
+{
+	std::vector <ASpell *>::iterator it_b = this->ar.begin();
+	std::vector <ASpell *>::iterator it_e = this->ar.end();
+	
+	while(it_b != it_e)
+	{
+		if((*it_b)->getName() == name)
+		{
+			(*it_b)->launch(at);
+			return;
+		}
+		it_b++;
+	}
 }

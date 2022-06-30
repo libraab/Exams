@@ -1,6 +1,7 @@
+#pragma once 
+#include <iostream>
 #include <string>
 #include "ASpell.hpp"
-#include "ATarget.hpp"
 
 class Fwoosh : public ASpell
 {

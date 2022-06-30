@@ -1,32 +1,30 @@
-#pragma once
-
-#include <string>
+#pragma once 
 #include <iostream>
-#include <vector>
+#include <string>
 #include "ASpell.hpp"
 #include "ATarget.hpp"
-#include "SpellBook.hpp"
+#include <vector>
+
 class Warlock
 {
-private:
-std::string name;
-std::string title;
+	public:
+		Warlock(const std::string &name, const std::string &title);
+		~Warlock();
+		
+		const std::string &getName() const;
+		const std::string &getTitle() const;
 
-Warlock();
-Warlock(Warlock const & other);
-Warlock & operator=(Warlock const & other);
-SpellBook b;
-public:
-Warlock(std::string const & name, std::string const & title);
-~Warlock();
+		void setTitle(const std::string &title);
+		void introduce() const;
 
-std::string const & getName() const;
-std::string const & getTitle() const;
+		void learnSpell(ASpell *as) ;
+		void forgetSpell(const std::string &name) ;
+		void launchSpell(const std::string &name, const ATarget &at) ;
 
-void setTitle(std::string const & title);
-void introduce() const;
-
-void learnSpell(ASpell *as);
-void forgetSpell(std::string const & name);
-void launchSpell(std::string const & name, ATarget const & at);
+	private:
+		Warlock(const Warlock &cpy);
+		std::string  name;
+		std::string  title;
+		Warlock &operator = (const Warlock &op);
+		std::vector <ASpell *> ar;
 };
